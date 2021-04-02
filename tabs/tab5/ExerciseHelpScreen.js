@@ -109,7 +109,7 @@ function view3() {
                 * Sports such as tennis, basketball or soccer
             </Text>
             <Text style={styles.infoText}>
-                * Any type of cardio
+                * Swimming
             </Text>
         </View>
     );

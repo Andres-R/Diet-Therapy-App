@@ -6,15 +6,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
 
-const BORDER_WIDTH = 1.5;
+const BORDER_WIDTH = 2;
 
-let view2height = 250;
-let view3height = 250;
-let view4height = 250;
-let view5height = 250;
+let viewheight = 250;
 
 let marginv = 10;
-let heightDifference = 20;
+
+
+var enduranceEx = [
+    { fruit: 'Running', id: '1' },
+    { fruit: 'Jogging', id: '2' },
+    { fruit: 'Biking', id: '3' },
+    { fruit: 'Swimming', id: '4' },
+];
 
 export default function PhysicalActivityScreen({ navigation }) {
 
@@ -27,13 +31,6 @@ export default function PhysicalActivityScreen({ navigation }) {
         { number: '6.', id: '6' },
     ]);
 
-    const [exercises, setExercises] = useState([
-        { exercise: 'Aerobic', id: '1' },
-        { exercise: 'Anaerobic', id: '2' },
-        { exercise: 'Stretching', id: '3' },
-        { exercise: 'Balancing', id: '4' },
-    ]);
-
     return (
         <View style={styles.defualtContainer}>
             <FlatList
@@ -41,7 +38,7 @@ export default function PhysicalActivityScreen({ navigation }) {
                 data={views}
                 renderItem={({ item }) => (
                     <View>
-                        {filterViews(item, exercises, { navigation })}
+                        {filterViews(item, { navigation })}
                     </View>
                 )}
             />
@@ -49,7 +46,7 @@ export default function PhysicalActivityScreen({ navigation }) {
     );
 }
 
-function filterViews(item, exercises, { navigation }) {
+function filterViews(item, { navigation }) {
     if (item.id === '1') {
         return view1();
     }
@@ -72,7 +69,7 @@ function filterViews(item, exercises, { navigation }) {
 
 function view1() {
     return (
-        <View style={styles.viewContainer1}>
+        <View style={styles.headerView}>
             <Text style={styles.title}>
                 Physical Activity
             </Text>
@@ -85,18 +82,62 @@ function view1() {
 
 function view2() {
     return (
-        <View style={styles.viewContainer2}>
-            <View style={styles.cardContainer2}>
+        <View style={styles.viewContainer}>
+            <View style={styles.cardContainer}>
+
                 <View style={styles.topCardArea}>
                     <Text style={styles.topCardText}>
+                        Endurance
+                    </Text>
+                </View>
 
-                    </Text>
+                <View style={styles.listViewArea}>
+                    <View style={{ flex: 1 }}>
+
+                        <FlatList
+                            horizontal={true}
+                            keyExtractor={(item) => item.id}
+                            data={enduranceEx}
+                            renderItem={({ item }) => (
+                                <View>
+                                    <View style={styles.cardContainerh}>
+                                        <View style={styles.itemTextConatiner}>
+                                            <Text style={styles.itemText}>
+                                                {item.fruit}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </View>
+
+
+                            )}
+                        />
+
+                    </View>
                 </View>
-                <View style={{ flex: 0.8, backgroundColor: 'white', justifyContent: 'center' }}>
-                    <Text>
-                        yo
-                    </Text>
+                <View style={styles.buttonTabArea}>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.removeText}>
+                                remove
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.addText}>
+                                add
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
             </View>
         </View>
     );
@@ -104,18 +145,55 @@ function view2() {
 
 function view3() {
     return (
-        <View style={styles.viewContainer3}>
-            <View style={styles.cardContainer3}>
+        <View style={styles.viewContainer}>
+            <View style={styles.cardContainer}>
+
                 <View style={styles.topCardArea}>
                     <Text style={styles.topCardText}>
+                        Strength
+                    </Text>
+                </View>
 
-                    </Text>
+                <View style={styles.listViewArea}>
+                    <View style={{ flex: 1 }}>
+
+                        {/* <FlatList
+                            keyExtractor={(item) => item.id}
+                            data={fruits}
+                            renderItem={({ item }) => (
+                                <View style={styles.itemView}>
+                                    <Text>
+                                        {item.fruit}
+                                    </Text>
+                                </View>
+                            )}
+                        /> */}
+
+                    </View>
                 </View>
-                <View style={{ }}>
-                    <Text>
-                        yo
-                    </Text>
+                <View style={styles.buttonTabArea}>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.removeText}>
+                                remove
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.addText}>
+                                add
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
             </View>
         </View>
     );
@@ -123,18 +201,55 @@ function view3() {
 
 function view4() {
     return (
-        <View style={styles.viewContainer4}>
-            <View style={styles.cardContainer4}>
+        <View style={styles.viewContainer}>
+            <View style={styles.cardContainer}>
+
                 <View style={styles.topCardArea}>
                     <Text style={styles.topCardText}>
+                        Balance
+                    </Text>
+                </View>
 
-                    </Text>
+                <View style={styles.listViewArea}>
+                    <View style={{ flex: 1 }}>
+
+                        {/* <FlatList
+                            keyExtractor={(item) => item.id}
+                            data={fruits}
+                            renderItem={({ item }) => (
+                                <View style={styles.itemView}>
+                                    <Text>
+                                        {item.fruit}
+                                    </Text>
+                                </View>
+                            )}
+                        /> */}
+
+                    </View>
                 </View>
-                <View style={{  }}>
-                    <Text>
-                        yo
-                    </Text>
+                <View style={styles.buttonTabArea}>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.removeText}>
+                                remove
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.addText}>
+                                add
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
             </View>
         </View>
     );
@@ -142,18 +257,55 @@ function view4() {
 
 function view5() {
     return (
-        <View style={styles.viewContainer5}>
-            <View style={styles.cardContainer5}>
+        <View style={styles.viewContainer}>
+            <View style={styles.cardContainer}>
+
                 <View style={styles.topCardArea}>
                     <Text style={styles.topCardText}>
+                        Flexibility
+                    </Text>
+                </View>
 
-                    </Text>
+                <View style={styles.listViewArea}>
+                    <View style={{ flex: 1 }}>
+
+                        {/* <FlatList
+                            keyExtractor={(item) => item.id}
+                            data={fruits}
+                            renderItem={({ item }) => (
+                                <View style={styles.itemView}>
+                                    <Text>
+                                        {item.fruit}
+                                    </Text>
+                                </View>
+                            )}
+                        /> */}
+
+                    </View>
                 </View>
-                <View style={{ }}>
-                    <Text>
-                        yo
-                    </Text>
+                <View style={styles.buttonTabArea}>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.removeText}>
+                                remove
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.optionArea}>
+                        <TouchableOpacity style={{ flex: 1 }}
+                            onPress={() => {
+
+                            }}>
+                            <Text style={styles.addText}>
+                                add
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
             </View>
         </View>
     );
@@ -161,7 +313,7 @@ function view5() {
 
 function view6({ navigation }) {
     return (
-        <View style={styles.viewContainer6}>
+        <View style={styles.footerView}>
             <TouchableOpacity style={styles.appButtonContainer}
                 onPress={() => {
                     navigation.navigate("Exercise");
@@ -210,10 +362,10 @@ const styles = StyleSheet.create({
         borderLeftColor: "black",
         borderTopColor: "black",
         borderRightColor: "black",
-        borderBottomWidth: BORDER_WIDTH + 0.5,
-        borderTopWidth: BORDER_WIDTH + 0.5,
-        borderRightWidth: BORDER_WIDTH + 0.5,
-        borderLeftWidth: BORDER_WIDTH + 0.5,
+        borderBottomWidth: BORDER_WIDTH,
+        borderTopWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
+        borderLeftWidth: BORDER_WIDTH,
         borderRadius: 50
     },
     title: {
@@ -226,86 +378,26 @@ const styles = StyleSheet.create({
         color: 'darkgray',
         textAlign: 'center'
     },
-    viewContainer1: {
+    headerView: {
         flex: 1,
         backgroundColor: 'white',
         height: 200,
         justifyContent: 'center'
     },
-    viewContainer2: {
+    viewContainer: {
         flex: 1,
         backgroundColor: 'white',
-        height: view2height,
+        height: 250,
     },
-    viewContainer3: {
-        flex: 1,
-        backgroundColor: 'white',
-        height: view2height,
-    },
-    viewContainer4: {
-        flex: 1,
-        backgroundColor: 'white',
-        height: view4height,
-    },
-    viewContainer5: {
-        flex: 1,
-        backgroundColor: 'white',
-        height: view5height,
-    },
-    viewContainer6: {
+    footerView: {
         flex: 1,
         backgroundColor: 'white',
         height: 150,
         justifyContent: 'center'
     },
-    cardContainer2: {
-        //flex: 1,
-        height: view2height - heightDifference,
-        backgroundColor: 'white',
-        marginHorizontal: 20,
-        marginVertical: marginv,
-        borderTopColor: 'black',
-        borderBottomColor: 'black',
-        borderRightColor: 'black',
-        borderLeftColor: 'black',
-        borderBottomWidth: BORDER_WIDTH,
-        borderTopWidth: BORDER_WIDTH,
-        borderRightWidth: BORDER_WIDTH,
-        borderLeftWidth: BORDER_WIDTH,
-    },
-    cardContainer3: {
-        //flex: 1,
-        height: view3height - heightDifference,
-        backgroundColor: 'white',
-        marginHorizontal: 20,
-        marginVertical: marginv,
-        borderTopColor: 'black',
-        borderBottomColor: 'black',
-        borderRightColor: 'black',
-        borderLeftColor: 'black',
-        borderBottomWidth: BORDER_WIDTH,
-        borderTopWidth: BORDER_WIDTH,
-        borderRightWidth: BORDER_WIDTH,
-        borderLeftWidth: BORDER_WIDTH,
-    },
-    cardContainer4: {
-        //flex: 1,
-        height: view4height - heightDifference,
-        backgroundColor: 'white',
-        marginHorizontal: 20,
-        marginVertical: marginv,
-        borderTopColor: 'black',
-        borderBottomColor: 'black',
-        borderRightColor: 'black',
-        borderLeftColor: 'black',
-        borderBottomWidth: BORDER_WIDTH,
-        borderTopWidth: BORDER_WIDTH,
-        borderRightWidth: BORDER_WIDTH,
-        borderLeftWidth: BORDER_WIDTH,
-    },
-    cardContainer5: {
-        //flex: 1,
-        height: view5height - heightDifference,
+    cardContainer: {
+        flex: 1,
+        height: 230,
         backgroundColor: 'white',
         marginHorizontal: 20,
         marginVertical: marginv,
@@ -319,13 +411,77 @@ const styles = StyleSheet.create({
         borderLeftWidth: BORDER_WIDTH,
     },
     topCardArea: {
-        height: 60,
+        flex: 0.25,
+        //height: 60,
         backgroundColor: '#F5F5F5',
         justifyContent: 'center'
+    },
+    bottomCardArea: {
+        height: 165,
+        backgroundColor: 'white'
     },
     topCardText: {
         color: "#1ecbe1",
         fontSize: 30,
         textAlign: 'center'
+    },
+    listViewArea: {
+        flex: 0.65,
+        //flexDirection: 'row',
+        //height: 141,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonTabArea: {
+        flex: 0.1,
+        flexDirection: 'row',
+        //height: 25,
+        backgroundColor: '#F5F5F5'
+    },
+    addText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center'
+    },
+    removeText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center'
+    },
+    optionArea: {
+        flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    itemView: {
+        justifyContent: 'center',
+        height: 40,
+        backgroundColor: 'lightgray',
+        marginHorizontal: 20,
+        marginVertical: 10
+    },
+    itemText: {
+        fontSize: 30,
+        color: 'black',
+        textAlign: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 20
+    },
+    cardContainerh: {
+        backgroundColor: "white",
+        flex: 1,
+        //height: 50,
+        width: 200,
+        marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    itemTextConatiner: {
+        backgroundColor: 'white',
+        borderRadius: 50,
+        elevation: 10
     }
 });
