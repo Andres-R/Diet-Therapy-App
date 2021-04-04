@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
             <View style={{ flex: 0.3 }}>
                 <View style={styles.bgImageContainer}>
-                    <Image source={require("../../assets/question3.png")} style={styles.bgImage} />
+                    <Image source={require("../../assets/checklist.png")} style={styles.bgImage} />
                 </View>
             </View>
 

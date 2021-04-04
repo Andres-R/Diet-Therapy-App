@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Image, Text, View, Button, TextInput } from 'react-native';
+import { Pressable, Modal, FlatList, StyleSheet, Image, Text, View, Button, TextInput } from 'react-native';
 import React, { useState } from 'react';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,20 +7,25 @@ import 'react-native-gesture-handler';
 
 
 const BORDER_WIDTH = 2;
-
-let viewheight = 250;
-
 let marginv = 10;
+
+let enduranceId = 5;
 
 
 var enduranceEx = [
-    { fruit: 'Running', id: '1' },
-    { fruit: 'Jogging', id: '2' },
-    { fruit: 'Biking', id: '3' },
-    { fruit: 'Swimming', id: '4' },
+    { exercise: 'Running', id: '1' },
+    { exercise: 'Jogging', id: '2' },
+    { exercise: 'Biking', id: '3' },
+    { exercise: 'Swimming', id: '4' },
 ];
 
 export default function PhysicalActivityScreen({ navigation }) {
+
+    const [enduranceModal, setEnduranceModal] = useState(false);
+
+    const [activityinput, setActivityInput] = useState('');
+    const [tempInput, setTempInput] = useState('');
+
 
     const [views, setViews] = useState([
         { number: '1.', id: '1' },
@@ -33,12 +38,57 @@ export default function PhysicalActivityScreen({ navigation }) {
 
     return (
         <View style={styles.defualtContainer}>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={enduranceModal}
+                onRequestClose={() => {
+                    setEnduranceModal(!enduranceModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to add to endurance activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                enduranceEx.push({ exercise: tempInput, id: enduranceId.toString() });
+                                enduranceId++;
+                                setTempInput('');
+                                setEnduranceModal(!enduranceModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Save
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setEnduranceModal(!enduranceModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={views}
                 renderItem={({ item }) => (
                     <View>
-                        {filterViews(item, { navigation })}
+                        {filterViews(item, { navigation },
+                            enduranceModal, setEnduranceModal)}
                     </View>
                 )}
             />
@@ -46,12 +96,12 @@ export default function PhysicalActivityScreen({ navigation }) {
     );
 }
 
-function filterViews(item, { navigation }) {
+function filterViews(item, { navigation }, enduranceModal, setEnduranceModal) {
     if (item.id === '1') {
         return view1();
     }
     else if (item.id === '2') {
-        return view2();
+        return view2(enduranceModal, setEnduranceModal);
     }
     else if (item.id === '3') {
         return view3();
@@ -80,7 +130,7 @@ function view1() {
     );
 }
 
-function view2() {
+function view2(enduranceModal, setEnduranceModal) {
     return (
         <View style={styles.viewContainer}>
             <View style={styles.cardContainer}>
@@ -103,7 +153,7 @@ function view2() {
                                     <View style={styles.cardContainerh}>
                                         <View style={styles.itemTextConatiner}>
                                             <Text style={styles.itemText}>
-                                                {item.fruit}
+                                                {item.exercise}
                                             </Text>
                                         </View>
                                     </View>
@@ -129,7 +179,7 @@ function view2() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setEnduranceModal(true);
                             }}>
                             <Text style={styles.addText}>
                                 add
@@ -483,5 +533,34 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 50,
         elevation: 10
-    }
+    },
+    modalView: {
+        justifyContent: 'center',
+        height: 250,
+        width: 350,
+        backgroundColor: '#F5F5F5',
+        borderTopColor: 'black',
+        borderBottomColor: 'black',
+        borderRightColor: 'black',
+        borderLeftColor: 'black',
+        borderBottomWidth: BORDER_WIDTH,
+        borderTopWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
+        borderLeftWidth: BORDER_WIDTH,
+    },
+    input: {
+        backgroundColor: 'white',
+        height: 40,
+        marginVertical: 5,
+        marginHorizontal: 15,
+        paddingHorizontal: 14,
+        borderBottomColor: "black",
+        borderLeftColor: "black",
+        borderTopColor: "black",
+        borderRightColor: "black",
+        borderBottomWidth: BORDER_WIDTH,
+        borderTopWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
+        borderLeftWidth: BORDER_WIDTH,
+    },
 });

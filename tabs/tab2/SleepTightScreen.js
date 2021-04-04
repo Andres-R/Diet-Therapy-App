@@ -31,6 +31,8 @@ var yyyy = today.getFullYear();
 
 today = mm + '/' + dd + '/' + yyyy;
 
+let hourInput = 0;
+
 export default function SleepTightScreen({ navigation }) {
 
     const [updateV, setUpdateV] = useState(0);
@@ -38,15 +40,10 @@ export default function SleepTightScreen({ navigation }) {
     const [inputModal, setInputModal] = useState(false);
     const [historyModal, setHistoryModal] = useState(false);
 
-    const [hourInput, setHourInput] = useState(null);
+    //const [hourInput, setHourInput] = useState(null);
     const [tempInput, setTempInput] = useState(null);
 
-    useInterval(() => {
-        if (beginClock) {
-            setUpdateV(updateV + 1);
-            beginClock = false;
-        }
-    }, 1000);
+    
 
 
     return (
@@ -72,8 +69,9 @@ export default function SleepTightScreen({ navigation }) {
                     </TextInput>
                     <Pressable style={styles.modalButtonContainer}
                         onPress={() => {
-                            setHourInput(tempInput);
-                            sleepHistory.push({ date: today, id: currentId.toString, hours: (hourInput) + '' });
+                            hourInput = tempInput.toString();
+                            //setHourInput(tempInput.toString());
+                            sleepHistory.push({ date: today, id: currentId.toString, hours: hourInput });
                             currentId++;
                             beginClock = true;
                             setInputModal(!inputModal);

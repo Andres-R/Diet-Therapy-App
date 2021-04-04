@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
+const BORDER_WIDTH = 2;
 
 export default function CreateAccountScreen({ navigation }) {
     const [age, setAge] = useState('');
@@ -64,7 +65,7 @@ export default function CreateAccountScreen({ navigation }) {
                 onChangeText={(val) => setOccupation(val)}>
             </TextInput>
 
-            <View style={{ padding: 10, backgroundColor: 'white', marginBottom: 20 }}>
+            <View style={styles.pickerContainer}>
                 <Text style={{ color: 'black' }}>Gender</Text>
                 <Picker
                     style={{ width: '100%', color: 'black' }}
@@ -88,28 +89,26 @@ export default function CreateAccountScreen({ navigation }) {
                 </Picker>
             </View>
 
-            <View>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Height (inches/centimeters)"
-                    value={height}
-                    onChangeText={(val) => setHeight(val)}
-                    keyboardType="numeric">
-                </TextInput>
+            <TextInput
+                style={styles.input}
+                placeholder="Height (inches/centimeters)"
+                value={height}
+                onChangeText={(val) => setHeight(val)}
+                keyboardType="numeric">
+            </TextInput>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Weight (pounds/kilograms)"
-                    value={weight}
-                    onChangeText={(val) => setWeight(val)}
-                    keyboardType="numeric">
-                </TextInput>
-            </View>
+            <TextInput
+                style={styles.input}
+                placeholder="Weight (pounds/kilograms)"
+                value={weight}
+                onChangeText={(val) => setWeight(val)}
+                keyboardType="numeric">
+            </TextInput>
 
             <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={() => {
-                    verify(age, gender, metric, email, weight, height, firstName, lastName, password, occupation, {navigation} );
+                    verify(age, gender, metric, email, weight, height, firstName, lastName, password, occupation, { navigation });
                 }}>
                 <Text style={styles.buttonText}>
                     Create account
@@ -120,7 +119,7 @@ export default function CreateAccountScreen({ navigation }) {
     );
 }
 
-function verify(age, gender, metric, email, weight, height, firstName, lastName, password, occupation, {navigation} ) {
+function verify(age, gender, metric, email, weight, height, firstName, lastName, password, occupation, { navigation }) {
     if (age === '' || gender === '' || metric === '' || email === '' || weight === '' || height === '' || firstName === '' || lastName === '' || password === '' || occupation === '') {
         Alert.alert("Missing information", "Please fill out all components", [{ text: "ok" }])
     }
@@ -144,17 +143,35 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: 'lightgreen'
+        backgroundColor: '#F5F5F5',
+        justifyContent: 'center'
     },
     input: {
         height: 40,
         backgroundColor: 'white',
-        marginBottom: 20,
-        paddingHorizontal: 10
+        marginVertical: 5,
+        paddingHorizontal: 10,
+        borderBottomColor: "black",
+        borderLeftColor: "black",
+        borderTopColor: "black",
+        borderRightColor: "black",
+        borderBottomWidth: BORDER_WIDTH,
+        borderTopWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
+        borderLeftWidth: BORDER_WIDTH,
+
     },
     pickerContainer: {
         padding: 10,
         backgroundColor: 'white',
-        marginBottom: 20
+        marginVertical: 5,
+        borderBottomColor: "black",
+        borderLeftColor: "black",
+        borderTopColor: "black",
+        borderRightColor: "black",
+        borderBottomWidth: BORDER_WIDTH,
+        borderTopWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
+        borderLeftWidth: BORDER_WIDTH,
     }
 });

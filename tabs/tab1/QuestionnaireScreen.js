@@ -564,7 +564,8 @@ function useInterval(callback, delay) {
 const styles = StyleSheet.create({
     container: {
         //backgroundColor: "#31b5ce",
-        backgroundColor: "#d4f5f9",
+        //backgroundColor: "#d4f5f9",
+        backgroundColor: '#F5F5F5',
         flex: 1,
         paddingTop: 40, // adds space at the top of the view (screen)
         paddingHorizontal: 20, // adds space to the sides of the view

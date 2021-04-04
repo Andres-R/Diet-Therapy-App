@@ -47,18 +47,19 @@ export default function ProfileScreen({ navigation }) {
                 onRequestClose={() => {
                     setSettingsModal(!settingsModal);
                 }}>
-                <View style={{ flex: 1, backgroundColor: 'white' }}>
-                    <View style={{ flex: 0.1, justifyContent: 'center' }}>
-                        <Text style={{ textAlign: 'center', fontSize: 40 }}>
-                            Settings
-                        </Text>
+                <View style={[StyleSheet.absoluteFill], { flex: 1, backgroundColor: 'white' }}>
+                    <View style={{ flex: 0.2, justifyContent: 'center', backgroundColor: 'lightgreen' }}>
+                        <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', borderBottomRightRadius: 50 }}>
+                            <Text style={styles.title}>
+                                Settings
+                            </Text>
+                            <Text style={styles.description}>
+                                edit and save your information here
+                            </Text>
+                        </View>
                     </View>
 
-                    <View style={{ flex: 0.2, backgroundColor: 'lightgray' }}>
-
-                    </View>
-
-                    <View style={{ flex: 0.55, justifyContent: 'center' }}>
+                    <View style={{ flex: 0.6, justifyContent: 'center', backgroundColor: 'lightgreen', borderBottomRightRadius: 50, borderTopLeftRadius: 50 }}>
                         <View style={styles.infoBox}>
                             <View style={styles.infoLabelView}>
                                 <Text style={styles.infoText}>
@@ -188,55 +189,55 @@ export default function ProfileScreen({ navigation }) {
                         </View>
                     </View>
 
-                    <View style={{ flex: 0.15, backgroundColor: 'lightgray', justifyContent: 'center' }}>
-                        <Pressable style={styles.sButtonContainer}
-                            onPress={() => {
-                                setFirstName(ifirstName);
-                                setLastName(ilastName);
-                                setName(ifirstName + " " + ilastName);
-                                setEmail(iemail);
-                                setOccupation(ioccupation);
-                                setGender(igender);
-                                setAge(iage);
-                                setHeight(iheight);
-                                setWeight(iweight);
+                    <View style={{ flex: 0.2, backgroundColor: 'lightgreen', justifyContent: 'center' }}>
+                        <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', borderTopLeftRadius: 50 }}>
+                            <Pressable style={styles.sButtonContainer}
+                                onPress={() => {
+                                    setFirstName(ifirstName);
+                                    setLastName(ilastName);
+                                    setName(ifirstName + " " + ilastName);
+                                    setEmail(iemail);
+                                    setOccupation(ioccupation);
+                                    setGender(igender);
+                                    setAge(iage);
+                                    setHeight(iheight);
+                                    setWeight(iweight);
 
-                                setSettingsModal(!settingsModal);
-                            }}>
-                            <Text style={styles.appButtonText}>
-                                Save
+                                    setSettingsModal(!settingsModal);
+                                }}>
+                                <Text style={styles.appButtonText}>
+                                    Save
                             </Text>
-                        </Pressable>
+                            </Pressable>
 
-                        <Pressable style={styles.sButtonContainer}
-                            onPress={() => {
-                                isetFirstName(firstName);
-                                isetLastName(lastName);
-                                isetName(name);
-                                isetEmail(email);
-                                isetOccupation(occupation);
-                                isetGender(gender);
-                                isetAge(age);
-                                isetHeight(height);
-                                isetWeight(weight);
+                            <Pressable style={styles.sButtonContainer}
+                                onPress={() => {
+                                    isetFirstName(firstName);
+                                    isetLastName(lastName);
+                                    isetName(name);
+                                    isetEmail(email);
+                                    isetOccupation(occupation);
+                                    isetGender(gender);
+                                    isetAge(age);
+                                    isetHeight(height);
+                                    isetWeight(weight);
 
-                                setSettingsModal(!settingsModal);
-                            }}>
-                            <Text style={styles.appButtonText}>
-                                Cancel
+                                    setSettingsModal(!settingsModal);
+                                }}>
+                                <Text style={styles.appButtonText}>
+                                    Cancel
                             </Text>
-                        </Pressable>
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
             </Modal>
 
-            <View style={styles.bgImageWrapper}>
-                <Image source={require("../../assets/healthy_background1.jpg")} style={styles.bgImage} />
-            </View>
+
 
             <View style={styles.slider}>
-                <View style={styles.circle}>
-
+                <View style={styles.bgImageWrapper}>
+                    <Image source={require("../../assets/healthy.png")} style={styles.bgImage} />
                 </View>
             </View>
 
@@ -513,7 +514,7 @@ const styles = StyleSheet.create({
         //flex: 1,
         backgroundColor: 'white',
         height: 40,
-        marginBottom: 5,
+        marginVertical: 5,
         //paddingHorizontal: 14,
         marginHorizontal: 20,
         borderBottomColor: "black",
@@ -544,7 +545,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         marginHorizontal: 20,
-        marginBottom: 5,
+        marginVertical: 5,
         borderBottomColor: "black",
         borderLeftColor: "black",
         borderTopColor: "black",
@@ -558,5 +559,15 @@ const styles = StyleSheet.create({
     userInputView: {
         flex: 0.7,
         justifyContent: 'center'
-    }
+    },
+    title: {
+        fontSize: 45,
+        color: 'black',
+        textAlign: 'center'
+    },
+    description: {
+        fontSize: 21,
+        color: 'darkgray',
+        textAlign: 'center'
+    },
 });
