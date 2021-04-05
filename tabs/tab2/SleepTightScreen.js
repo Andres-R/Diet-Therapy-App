@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         //paddingTop: 5,
         //paddingBottom: 5,
         marginHorizontal: 15,
-        marginVertical: 30,
+        marginVertical: 10,
         paddingHorizontal: 12,
         borderBottomColor: "black",
         borderLeftColor: "black",

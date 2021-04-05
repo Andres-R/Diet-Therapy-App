@@ -10,6 +10,9 @@ const BORDER_WIDTH = 2;
 let marginv = 10;
 
 let enduranceId = 5;
+let strengthId = 3;
+let balanceId = 3;
+let flexibilityId = 3;
 
 
 var enduranceEx = [
@@ -19,11 +22,34 @@ var enduranceEx = [
     { exercise: 'Swimming', id: '4' },
 ];
 
+var strengthEx = [
+    { exercise: 'Benching', id: '1' },
+    { exercise: 'Curls', id: '2' },
+];
+
+var balanceEx = [
+    { exercise: 'Tai Chi', id: '1' },
+    { exercise: 'Leg lift', id: '2' },
+];
+
+var flexibilityEx = [
+    { exercise: 'Jump lunge', id: '1' },
+    { exercise: 'Back stretch', id: '2' },
+];
+
+
+
 export default function PhysicalActivityScreen({ navigation }) {
 
-    const [enduranceModal, setEnduranceModal] = useState(false);
+    const [enduranceAddModal, setenduranceAddModal] = useState(false);
+    const [enduranceRemoveModal, setenduranceRemoveModal] = useState(false);
+    const [strengthAddModal, setstrengthAddModal] = useState(false);
+    const [stengthRemoveModal, setstengthRemoveModal] = useState(false);
+    const [balanceAddModal, setbalanceAddModal] = useState(false);
+    const [balanceRemoveModal, setbalanceRemoveModal] = useState(false);
+    const [flexibilityAddModal, setflexibilityAddModal] = useState(false);
+    const [flexibilityRemovemodal, setflexibilityRemovemodal] = useState(false);
 
-    const [activityinput, setActivityInput] = useState('');
     const [tempInput, setTempInput] = useState('');
 
 
@@ -42,9 +68,9 @@ export default function PhysicalActivityScreen({ navigation }) {
             <Modal
                 animationType="fade"
                 transparent={true}
-                visible={enduranceModal}
+                visible={enduranceAddModal}
                 onRequestClose={() => {
-                    setEnduranceModal(!enduranceModal);
+                    setenduranceAddModal(!enduranceAddModal);
                 }}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={styles.modalView}>
@@ -62,7 +88,7 @@ export default function PhysicalActivityScreen({ navigation }) {
                                 enduranceEx.push({ exercise: tempInput, id: enduranceId.toString() });
                                 enduranceId++;
                                 setTempInput('');
-                                setEnduranceModal(!enduranceModal);
+                                setenduranceAddModal(!enduranceAddModal);
                             }}>
                             <Text style={styles.appButtonText}>
                                 Save
@@ -71,7 +97,7 @@ export default function PhysicalActivityScreen({ navigation }) {
                         <Pressable style={styles.appButtonContainer}
                             onPress={() => {
                                 setTempInput('');
-                                setEnduranceModal(!enduranceModal);
+                                setenduranceAddModal(!enduranceAddModal);
                             }}>
                             <Text style={styles.appButtonText}>
                                 Cancel
@@ -82,13 +108,365 @@ export default function PhysicalActivityScreen({ navigation }) {
                 </View>
             </Modal>
 
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={enduranceRemoveModal}
+                onRequestClose={() => {
+                    setenduranceRemoveModal(!enduranceRemoveModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to remove from endurance activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                var i;
+                                var actualIndex = 0;
+                                for (i = 0; i < enduranceEx.length; i++) {
+                                    if (enduranceEx[i].exercise.toLowerCase() === tempInput.toLowerCase()) {
+                                        actualIndex = i;
+                                    }
+                                }
+                                // console.log("---");
+                                // console.log("before removal");
+                                // console.log("targetId: " + targetId);
+                                // console.log("acualIndex: " + actualIndex);
+                                // console.log("enduranceId: " + enduranceId);
+                                // for (i = 0; i < enduranceEx.length; i++) {
+                                //     console.log("index: " + i + " exercise: " + enduranceEx[i].exercise + " id: " + enduranceEx[i].id);
+                                // }
+                                enduranceEx.splice(actualIndex, 1);
+                                // enduranceId--;
+                                // console.log("---");
+                                // console.log("after removal");
+                                // console.log("targetId: " + targetId);
+                                // console.log("acualIndex: " + actualIndex);
+                                // console.log("enduranceId: " + enduranceId);
+                                // for (i = 0; i < enduranceEx.length; i++) {
+                                //     console.log("index: " + i + " exercise: " + enduranceEx[i].exercise + " id: " + enduranceEx[i].id);
+                                // }
+                                setTempInput('');
+                                setenduranceRemoveModal(!enduranceRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Remove
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setenduranceRemoveModal(!enduranceRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={strengthAddModal}
+                onRequestClose={() => {
+                    setstrengthAddModal(!strengthAddModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to add to strength activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                strengthEx.push({ exercise: tempInput, id: strengthId.toString() });
+                                strengthId++;
+                                setTempInput('');
+                                setstrengthAddModal(!strengthAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Save
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setstrengthAddModal(!strengthAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={stengthRemoveModal}
+                onRequestClose={() => {
+                    setstengthRemoveModal(!stengthRemoveModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to remove from strength activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                var i;
+                                var actualIndex = 0;
+                                for (i = 0; i < strengthEx.length; i++) {
+                                    if (strengthEx[i].exercise.toLowerCase() === tempInput.toLowerCase()) {
+                                        actualIndex = i;
+                                    }
+                                }
+                                strengthEx.splice(actualIndex, 1);
+                                setTempInput('');
+                                setstengthRemoveModal(!stengthRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Remove
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setstengthRemoveModal(!stengthRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={balanceAddModal}
+                onRequestClose={() => {
+                    setbalanceAddModal(!balanceAddModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to add to balance activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                balanceEx.push({ exercise: tempInput, id: balanceId.toString() });
+                                balanceId++;
+                                setTempInput('');
+                                setbalanceAddModal(!balanceAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Save
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setbalanceAddModal(!balanceAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={balanceRemoveModal}
+                onRequestClose={() => {
+                    setbalanceRemoveModal(!balanceRemoveModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to remove from balance activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                var i;
+                                var actualIndex = 0;
+                                for (i = 0; i < balanceEx.length; i++) {
+                                    if (balanceEx[i].exercise.toLowerCase() === tempInput.toLowerCase()) {
+                                        actualIndex = i;
+                                    }
+                                }
+                                balanceEx.splice(actualIndex, 1);
+                                setTempInput('');
+                                setbalanceRemoveModal(!balanceRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Remove
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setbalanceRemoveModal(!balanceRemoveModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={flexibilityAddModal}
+                onRequestClose={() => {
+                    setflexibilityAddModal(!flexibilityAddModal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to add to flexibility activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                flexibilityEx.push({ exercise: tempInput, id: flexibilityId.toString() });
+                                flexibilityId++;
+                                setTempInput('');
+                                setflexibilityAddModal(!flexibilityAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Save
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setflexibilityAddModal(!flexibilityAddModal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={flexibilityRemovemodal}
+                onRequestClose={() => {
+                    setflexibilityRemovemodal(!flexibilityRemovemodal);
+                }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.modalView}>
+                        <Text style={{ textAlign: 'center', color: 'black', fontSize: 23 }}>
+                            What exercise would you like to remove from flexibility activities?
+                        </Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter activity"
+                            value={tempInput}
+                            onChangeText={(val) => setTempInput(val)}>
+                        </TextInput>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                var i;
+                                var actualIndex = 0;
+                                for (i = 0; i < flexibilityEx.length; i++) {
+                                    if (flexibilityEx[i].exercise.toLowerCase() === tempInput.toLowerCase()) {
+                                        actualIndex = i;
+                                    }
+                                }
+                                flexibilityEx.splice(actualIndex, 1);
+                                setTempInput('');
+                                setflexibilityRemovemodal(!flexibilityRemovemodal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Remove
+                            </Text>
+                        </Pressable>
+                        <Pressable style={styles.appButtonContainer}
+                            onPress={() => {
+                                setTempInput('');
+                                setflexibilityRemovemodal(!flexibilityRemovemodal);
+                            }}>
+                            <Text style={styles.appButtonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+            </Modal>
+
+
+
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={views}
                 renderItem={({ item }) => (
                     <View>
                         {filterViews(item, { navigation },
-                            enduranceModal, setEnduranceModal)}
+                            setenduranceAddModal,
+                            setenduranceRemoveModal,
+                            setstrengthAddModal,
+                            setstengthRemoveModal,
+                            setbalanceAddModal,
+                            setbalanceRemoveModal,
+                            setflexibilityAddModal,
+                            setflexibilityRemovemodal
+                        )}
                     </View>
                 )}
             />
@@ -96,21 +474,29 @@ export default function PhysicalActivityScreen({ navigation }) {
     );
 }
 
-function filterViews(item, { navigation }, enduranceModal, setEnduranceModal) {
+function filterViews(item, { navigation },
+    setenduranceAddModal,
+    setenduranceRemoveModal,
+    setstrengthAddModal,
+    setstengthRemoveModal,
+    setbalanceAddModal,
+    setbalanceRemoveModal,
+    setflexibilityAddModal,
+    setflexibilityRemovemodal) {
     if (item.id === '1') {
         return view1();
     }
     else if (item.id === '2') {
-        return view2(enduranceModal, setEnduranceModal);
+        return view2(setenduranceAddModal, setenduranceRemoveModal);
     }
     else if (item.id === '3') {
-        return view3();
+        return view3(setstrengthAddModal, setstengthRemoveModal);
     }
     else if (item.id === '4') {
-        return view4();
+        return view4(setbalanceAddModal, setbalanceRemoveModal);
     }
     else if (item.id === '5') {
-        return view5();
+        return view5(setflexibilityAddModal, setflexibilityRemovemodal);
     }
     else {
         return view6({ navigation });
@@ -130,7 +516,7 @@ function view1() {
     );
 }
 
-function view2(enduranceModal, setEnduranceModal) {
+function view2(setenduranceAddModal, setenduranceRemoveModal) {
     return (
         <View style={styles.viewContainer}>
             <View style={styles.cardContainer}>
@@ -158,8 +544,6 @@ function view2(enduranceModal, setEnduranceModal) {
                                         </View>
                                     </View>
                                 </View>
-
-
                             )}
                         />
 
@@ -169,7 +553,7 @@ function view2(enduranceModal, setEnduranceModal) {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setenduranceRemoveModal(true);
                             }}>
                             <Text style={styles.removeText}>
                                 remove
@@ -179,7 +563,7 @@ function view2(enduranceModal, setEnduranceModal) {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-                                setEnduranceModal(true);
+                                setenduranceAddModal(true);
                             }}>
                             <Text style={styles.addText}>
                                 add
@@ -193,7 +577,7 @@ function view2(enduranceModal, setEnduranceModal) {
     );
 }
 
-function view3() {
+function view3(setstrengthAddModal, setstengthRemoveModal) {
     return (
         <View style={styles.viewContainer}>
             <View style={styles.cardContainer}>
@@ -207,17 +591,22 @@ function view3() {
                 <View style={styles.listViewArea}>
                     <View style={{ flex: 1 }}>
 
-                        {/* <FlatList
+                        <FlatList
+                            horizontal={true}
                             keyExtractor={(item) => item.id}
-                            data={fruits}
+                            data={strengthEx}
                             renderItem={({ item }) => (
-                                <View style={styles.itemView}>
-                                    <Text>
-                                        {item.fruit}
-                                    </Text>
+                                <View>
+                                    <View style={styles.cardContainerh}>
+                                        <View style={styles.itemTextConatiner}>
+                                            <Text style={styles.itemText}>
+                                                {item.exercise}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             )}
-                        /> */}
+                        />
 
                     </View>
                 </View>
@@ -225,7 +614,7 @@ function view3() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setstengthRemoveModal(true);
                             }}>
                             <Text style={styles.removeText}>
                                 remove
@@ -235,7 +624,7 @@ function view3() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setstrengthAddModal(true);
                             }}>
                             <Text style={styles.addText}>
                                 add
@@ -249,7 +638,7 @@ function view3() {
     );
 }
 
-function view4() {
+function view4(setbalanceAddModal, setbalanceRemoveModal) {
     return (
         <View style={styles.viewContainer}>
             <View style={styles.cardContainer}>
@@ -263,17 +652,22 @@ function view4() {
                 <View style={styles.listViewArea}>
                     <View style={{ flex: 1 }}>
 
-                        {/* <FlatList
+                        <FlatList
+                            horizontal={true}
                             keyExtractor={(item) => item.id}
-                            data={fruits}
+                            data={balanceEx}
                             renderItem={({ item }) => (
-                                <View style={styles.itemView}>
-                                    <Text>
-                                        {item.fruit}
-                                    </Text>
+                                <View>
+                                    <View style={styles.cardContainerh}>
+                                        <View style={styles.itemTextConatiner}>
+                                            <Text style={styles.itemText}>
+                                                {item.exercise}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             )}
-                        /> */}
+                        />
 
                     </View>
                 </View>
@@ -281,7 +675,7 @@ function view4() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setbalanceRemoveModal(true);
                             }}>
                             <Text style={styles.removeText}>
                                 remove
@@ -291,7 +685,7 @@ function view4() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setbalanceAddModal(true);
                             }}>
                             <Text style={styles.addText}>
                                 add
@@ -305,7 +699,7 @@ function view4() {
     );
 }
 
-function view5() {
+function view5(setflexibilityAddModal, setflexibilityRemovemodal) {
     return (
         <View style={styles.viewContainer}>
             <View style={styles.cardContainer}>
@@ -319,17 +713,22 @@ function view5() {
                 <View style={styles.listViewArea}>
                     <View style={{ flex: 1 }}>
 
-                        {/* <FlatList
+                        <FlatList
+                            horizontal={true}
                             keyExtractor={(item) => item.id}
-                            data={fruits}
+                            data={flexibilityEx}
                             renderItem={({ item }) => (
-                                <View style={styles.itemView}>
-                                    <Text>
-                                        {item.fruit}
-                                    </Text>
+                                <View>
+                                    <View style={styles.cardContainerh}>
+                                        <View style={styles.itemTextConatiner}>
+                                            <Text style={styles.itemText}>
+                                                {item.exercise}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             )}
-                        /> */}
+                        />
 
                     </View>
                 </View>
@@ -337,7 +736,7 @@ function view5() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setflexibilityRemovemodal(true);
                             }}>
                             <Text style={styles.removeText}>
                                 remove
@@ -347,7 +746,7 @@ function view5() {
                     <View style={styles.optionArea}>
                         <TouchableOpacity style={{ flex: 1 }}
                             onPress={() => {
-
+                                setflexibilityAddModal(true);
                             }}>
                             <Text style={styles.addText}>
                                 add
@@ -547,6 +946,7 @@ const styles = StyleSheet.create({
         borderTopWidth: BORDER_WIDTH,
         borderRightWidth: BORDER_WIDTH,
         borderLeftWidth: BORDER_WIDTH,
+        borderRadius: 25
     },
     input: {
         backgroundColor: 'white',

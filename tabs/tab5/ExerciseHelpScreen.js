@@ -135,7 +135,7 @@ function view5() {
                 Weight lifting
             </Text>
             <Text style={styles.infoText}>
-                * Bicep curls, tricep exercises, squating, bencing, any use of dumbells
+                * Bicep curls, tricep exercises, squating, benching, any use of dumbells
             </Text>
             <Text style={styles.infoText}>
                 Calisthenics

@@ -13,7 +13,7 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.bgImageContainer}>
-                <Image source={require("../assets/welcome.png")} style={styles.bgImage} />
+                <Image source={require("../assets/healthy.png")} style={styles.bgImage} />
             </View>
 
             <View style={{ flex: 0.4 }}>

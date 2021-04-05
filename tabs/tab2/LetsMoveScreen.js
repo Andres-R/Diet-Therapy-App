@@ -8,7 +8,7 @@ import 'react-native-gesture-handler';
 
 
 const BORDER_WIDTH = 2;
-const mBORDER_WIDTH = 1.5;
+const mBORDER_WIDTH = 2;
 
 let hasSetGoals = false;
 
@@ -582,7 +582,8 @@ const styles = StyleSheet.create({
         borderTopWidth: mBORDER_WIDTH,
         borderRightWidth: mBORDER_WIDTH,
         borderLeftWidth: mBORDER_WIDTH,
-        marginBottom: 5
+        marginBottom: 5,
+        borderRadius: 50
     },
     appButtonText: {
         fontSize: 18,
