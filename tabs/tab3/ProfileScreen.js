@@ -48,7 +48,7 @@ export default function ProfileScreen({ navigation }) {
                     setSettingsModal(!settingsModal);
                 }}>
                 <View style={[StyleSheet.absoluteFill], { flex: 1, backgroundColor: 'white' }}>
-                    <View style={{ flex: 0.2, justifyContent: 'center', backgroundColor: 'lightgreen' }}>
+                    <View style={{ flex: 0.2, justifyContent: 'center', backgroundColor: '#E8E8E8' }}>
                         <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', borderBottomRightRadius: 50 }}>
                             <Text style={styles.title}>
                                 Settings
@@ -59,7 +59,7 @@ export default function ProfileScreen({ navigation }) {
                         </View>
                     </View>
 
-                    <View style={{ flex: 0.6, justifyContent: 'center', backgroundColor: 'lightgreen', borderBottomRightRadius: 50, borderTopLeftRadius: 50 }}>
+                    <View style={{ flex: 0.6, justifyContent: 'center', backgroundColor: '#E8E8E8', borderBottomRightRadius: 50, borderTopLeftRadius: 50 }}>
                         <View style={styles.infoBox}>
                             <View style={styles.infoLabelView}>
                                 <Text style={styles.infoText}>
@@ -189,7 +189,7 @@ export default function ProfileScreen({ navigation }) {
                         </View>
                     </View>
 
-                    <View style={{ flex: 0.2, backgroundColor: 'lightgreen', justifyContent: 'center' }}>
+                    <View style={{ flex: 0.2, backgroundColor: '#E8E8E8', justifyContent: 'center' }}>
                         <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', borderTopLeftRadius: 50 }}>
                             <Pressable style={styles.sButtonContainer}
                                 onPress={() => {
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
         borderTopWidth: BORDER_WIDTH,
         borderRightWidth: BORDER_WIDTH,
         borderLeftWidth: BORDER_WIDTH,
-        //borderRadius: 50
+        borderRadius: 50
     },
     appButtonText: {
         fontSize: 18,

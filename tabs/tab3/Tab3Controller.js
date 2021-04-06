@@ -8,12 +8,11 @@ import 'react-native-gesture-handler';
 import MedicalHistoryScreen from './MedicalHistoryScreen';
 import PhysicalActivityScreen from './PhysicalActivityScreen';
 import ProfileScreen from './ProfileScreen';
-import SettingsScreen from './SettingsScreen';
 import ExerciseHelpScreen from './ExerciseHelpScreen';
 
 const Stack = createStackNavigator();
 
-export default function Tab5Controller() {
+export default function Tab3Controller() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={ProfileScreen}
@@ -21,8 +20,6 @@ export default function Tab5Controller() {
             <Stack.Screen name="PhysicalActivity" component={PhysicalActivityScreen}
                 options={{ headerShown: false }} />
             <Stack.Screen name="MedicalHistory" component={MedicalHistoryScreen}
-                options={{ headerShown: false }} />
-            <Stack.Screen name="Settings" component={SettingsScreen}
                 options={{ headerShown: false }} />
             <Stack.Screen name="Exercise" component={ExerciseHelpScreen}
                 options={{ headerShown: false }} />

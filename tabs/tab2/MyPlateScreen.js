@@ -12,12 +12,14 @@ const BORDER_WIDTH = 1.5;
 let gender = 'male';
 let weight = 60;
 let calories = 0;
+let calorieRange = "";
 
 let grainsServings = 0;
 let vegetablesServings = 0;
 let fruitsServings = 0;
 let dairyServings = 0;
 let proteinServings = 0;
+
 
 export default function MyPlateScreen({ navigation }) {
 
@@ -29,6 +31,7 @@ export default function MyPlateScreen({ navigation }) {
     }
 
     if (calories >= 1200 && calories < 1500) {
+        calorieRange = "1200-1499";
         grainsServings = 7;
         vegetablesServings = 4;
         fruitsServings = 3;
@@ -36,6 +39,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 5;
     }
     if (calories >= 1500 && calories < 1800) {
+        calorieRange = "1500-1799";
         grainsServings = 8;
         vegetablesServings = 5;
         fruitsServings = 4;
@@ -43,6 +47,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 6;
     }
     if (calories >= 1800 && calories < 2000) {
+        calorieRange = "1800-1999";
         grainsServings = 9;
         vegetablesServings = 5;
         fruitsServings = 4;
@@ -50,6 +55,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 6;
     }
     if (calories >= 2000 && calories < 2200) {
+        calorieRange = "2000-2199";
         grainsServings = 11;
         vegetablesServings = 5;
         fruitsServings = 4;
@@ -57,6 +63,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 6;
     }
     if (calories >= 2200 && calories < 2600) {
+        calorieRange = "2200-2599";
         grainsServings = 13;
         vegetablesServings = 6;
         fruitsServings = 5;
@@ -64,6 +71,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 7;
     }
     if (calories >= 2600 && calories < 3000) {
+        calorieRange = "2600-2999";
         grainsServings = 15;
         vegetablesServings = 6;
         fruitsServings = 6;
@@ -71,6 +79,7 @@ export default function MyPlateScreen({ navigation }) {
         proteinServings = 8;
     }
     if (calories >= 3000 && calories < 3500) {
+        calorieRange = "3000-3500";
         grainsServings = 17;
         vegetablesServings = 6;
         fruitsServings = 6;
@@ -106,14 +115,20 @@ export default function MyPlateScreen({ navigation }) {
         { number: '8.', id: '8' },
         { number: '9.', id: '9' },
     ]);
+
+    // const [calorieGroup, setCalorieGroup] = useState([
+    //     { range: '1200-1499', id: '1', grain: '7', vegetables: '4', fruits: '3', dairy: '2', protein: '5' },
+    //     { range: '1500-1799', id: '2', grain: '8', vegetables: '5', fruits: '4', dairy: '2', protein: '6' },
+    //     { range: '1800-1999', id: '3', grain: '9', vegetables: '5', fruits: '4', dairy: '3', protein: '6' },
+    //     { range: '2000-2199', id: '4', grain: '11', vegetables: '5', fruits: '4', dairy: '3', protein: '6' },
+    //     { range: '2200-2599', id: '5', grain: '13', vegetables: '6', fruits: '5', dairy: '3', protein: '7' },
+    //     { range: '2600-2999', id: '6', grain: '15', vegetables: '6', fruits: '6', dairy: '3', protein: '8' },
+    //     { range: '3000-3500', id: '7', grain: '17', vegetables: '6', fruits: '6', dairy: '3', protein: '8' },
+    // ]);
+
     const [calorieGroup, setCalorieGroup] = useState([
-        { range: '1200-1499', id: '1', grain: '7', vegetables: '4', fruits: '3', dairy: '2', protein: '5' },
-        { range: '1500-1799', id: '2', grain: '8', vegetables: '5', fruits: '4', dairy: '2', protein: '6' },
-        { range: '1800-1999', id: '3', grain: '9', vegetables: '5', fruits: '4', dairy: '3', protein: '6' },
-        { range: '2000-2199', id: '4', grain: '11', vegetables: '5', fruits: '4', dairy: '3', protein: '6' },
-        { range: '2200-2599', id: '5', grain: '13', vegetables: '6', fruits: '5', dairy: '3', protein: '7' },
-        { range: '2600-2999', id: '6', grain: '15', vegetables: '6', fruits: '6', dairy: '3', protein: '8' },
-        { range: '3000-3500', id: '7', grain: '17', vegetables: '6', fruits: '6', dairy: '3', protein: '8' },
+        { range: calorieRange, id: '1', grain: grainsServings, vegetables: vegetablesServings, fruits: fruitsServings, dairy: dairyServings, protein: proteinServings },
+
     ]);
 
     return (
@@ -365,17 +380,15 @@ function view8() {
 function view9({ navigation }) {
     return (
         <View style={styles.cardContainer9}>
-            <View style={styles.card}>
-                <View style={styles.bottomButtonArea}>
-                    <TouchableOpacity style={styles.appButtonContainer}
-                        onPress={() => {
-                            navigation.navigate("FlatListDisplay");
-                        }}>
-                        <Text style={styles.appButtonText}>
-                            go back
+            <View style={styles.bottomButtonArea}>
+                <TouchableOpacity style={styles.appButtonContainer}
+                    onPress={() => {
+                        navigation.navigate("FlatListDisplay");
+                    }}>
+                    <Text style={styles.appButtonText}>
+                        go back
                     </Text>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -398,7 +411,7 @@ const styles = StyleSheet.create({
         //backgroundColor: "red",
         //flex: 1,
         height: 235,
-        width: 250,
+        width: 375,
         //backgroundColor: 'lightgray',
         flex: 1,
         marginHorizontal: 5,
@@ -481,7 +494,9 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     card: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     cardContainer1: {
         flex: 1,
