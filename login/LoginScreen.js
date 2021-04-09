@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, View, Button, TextInput } from 'react-native';
+import { Alert, StyleSheet, Image, Text, View, Button, TextInput } from 'react-native';
 import React, { useState } from 'react';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -45,7 +45,7 @@ export default function LoginScreen({ navigation }) {
                     <TouchableOpacity
                         style={styles.buttonContainer}
                         onPress={() => {
-                            navigation.navigate("TabManager");
+                            verify(email, password, { navigation });
                         }}>
                         <Text style={styles.buttonText}>
                             LOGIN
@@ -71,6 +71,16 @@ export default function LoginScreen({ navigation }) {
             </View>
         </View>
     );
+}
+
+function verify(username, password, { navigation }) {
+    if (username === '' || password === '') {
+        Alert.alert("Login failed", "Please enter valid credentials", [{ text: "ok" }]);
+        //printAnswers(q1answer, q2answer, q3answer, q4answer, q5answer, q6answer, q7answer, q8answer, q9answer, q10answer);
+    }
+    else {
+        navigation.navigate("TabManager");
+    }
 }
 
 const styles = StyleSheet.create({

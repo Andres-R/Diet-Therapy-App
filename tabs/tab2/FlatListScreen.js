@@ -59,7 +59,7 @@ export default function FlatListScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 40, // adds space at the top of the view (screen)
+        paddingTop: 20, // adds space at the top of the view (screen)
         //paddingHorizontal: 20, // adds space to the sides of the view
         backgroundColor: "white"
     },
